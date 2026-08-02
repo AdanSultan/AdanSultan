@@ -25,7 +25,5 @@
 
 ## 🐍 Snake Game
 
-![Snake animation](https://raw.githubusercontent.com/AdanSultan/Adan/output/dist/github-snake-dark.svg#gh-dark-mode-only)
-![Snake animation](https://raw.githubusercontent.com/AdanSultan/Adan/output/dist/github-snake.svg#gh-light-mode-only)
-
+<img src="https://raw.githubusercontent.com/AdanSultan/AdanSultan/output/dist/github-snake-dark.svg" alt="Snake animation" />
 <!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
