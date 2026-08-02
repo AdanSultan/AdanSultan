@@ -1,5 +1,5 @@
 # 💫 About Me:
-### About Me 👋<br>- 🔭 I'm currently working on **data pipelines, CRM automation, and analytics workflows** as a Data Analyst Intern<br>- 👯 I'm looking to collaborate on **AI/ML and data-driven projects**<br>- 🤝 I'm looking for help with **advanced Machine Learning and Deep Learning concepts**<br>- 🌱 I'm currently learning and improving my skills in **Data Science and AI**<br>- 💬 Ask me about **data analysis, CRM systems (SuiteCRM, Twenty CRM), or Excel automation**<br>- ⚡ Fun fact: **I recently graduated in Computer Science and I'm already knee-deep in data pipelines and AI experiments!**
+<br>- 🔭 I'm currently working on **data pipelines, CRM automation, and analytics workflows** as a Data Analyst <br>- 👯 I'm looking to collaborate on **AI/ML and data-driven projects**<br>- 🤝 I'm looking for help with **advanced Machine Learning and Deep Learning concepts**<br>- 🌱 I'm currently learning and improving my skills in **Data Science and AI**<br>- 💬 Ask me about **data analysis, CRM systems (SuiteCRM, Twenty CRM), or Excel automation**<br>- ⚡ Fun fact: **I recently graduated in Computer Science and I'm already knee-deep in data pipelines and AI experiments!**
 
 
 ## 🌐 Socials:
@@ -20,10 +20,12 @@
 
 ### 🔝 Top Contributed Repo
 ![](https://github-contributor-stats.vercel.app/api?username=AdanSultan&limit=5&theme=dark&combine_all_yearly_contributions=true)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tobiasmeyhoefer/tobiasmeyhoefer/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/tobiasmeyhoefer/tobiasmeyhoefer/output/github-snake.svg" />
+  <img alt="github-snake" src="https://raw.githubusercontent.com/tobiasmeyhoefer/tobiasmeyhoefer/output/github-snake.svg" />
+</picture>
+
 ---
 [![](https://komarev.com/ghpvc/?username=AdanSultan&icon=0&color=0)](https://visitcount.itsvg.in)
-
-## 🐍 Snake Game
-
-<img src="https://raw.githubusercontent.com/AdanSultan/AdanSultan/output/dist/github-snake-dark.svg" alt="Snake animation" />
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
