@@ -78,16 +78,15 @@ function wrapText(text, maxCharsPerLine) {
 
 // ---------- SVG card shell (dark theme, matches previous badge look) ----------
 
-function cardShell({ width = 420, height = 195, title, body }) {
-  const titleText = title ? `<text x="25" y="35" class="title">${title}</text>` : '';
+function cardShell({ width = 420, height = 195, title, body, titleColor = '#58a6ff', borderColor = '#30363d', borderWidth = 1 }) {
+  const titleText = title ? `<text x="25" y="35" fill="${titleColor}" style="font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif;">${title}</text>` : '';
   return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #58a6ff; }
     .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
     .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <rect x="${borderWidth / 2}" y="${borderWidth / 2}" width="${width - borderWidth}" height="${height - borderWidth}" rx="10" fill="#0d1117" stroke="${borderColor}" stroke-width="${borderWidth}"/>
   ${titleText}
   ${body}
 </svg>`;
@@ -152,7 +151,13 @@ async function buildStatsCard(repos, user, prCount, issueCount, totalCommits) {
 
   const footer = `<text x="25" y="185" class="footer">Updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</text>`;
 
-  return cardShell({ title: `${displayName}'s GitHub Stats`, body: body + ring + footer });
+  return cardShell({
+    title: `${displayName}'s GitHub Stats`,
+    body: body + ring + footer,
+    titleColor: '#ffffff',
+    borderColor: '#e6edf3',
+    borderWidth: 2.5,
+  });
 }
 
 // ---------- 2. Streak card (circular flame + date ranges) ----------
@@ -244,7 +249,13 @@ function buildStreakCard(data) {
 
   <text x="25" y="185" class="footer">Updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</text>`;
 
-  return cardShell({ title: `Contribution Streak`, body });
+  return cardShell({
+    title: `Contribution Streak`,
+    body,
+    titleColor: '#ffffff',
+    borderColor: '#e6edf3',
+    borderWidth: 2.5,
+  });
 }
 
 // ---------- 3. Top languages (single bar + colored dot legend) ----------
@@ -325,6 +336,9 @@ async function buildTopLangsCard(repos) {
     title: `Most Used Languages`,
     height,
     body: `<rect x="25" y="${barY}" width="${barW}" height="${barH}" rx="5" fill="#30363d"/>${barSegments}${legend}`,
+    titleColor: '#ffffff',
+    borderColor: '#e6edf3',
+    borderWidth: 2.5,
   });
 }
 
