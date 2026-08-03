@@ -1,12 +1,11 @@
 <svg width="420" height="195" viewBox="0 0 420 195" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #58a6ff; }
     .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
     .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="0.5" y="0.5" width="419" height="194" rx="10" fill="#0d1117" stroke="#30363d"/>
-  <text x="25" y="35" class="title">Dur E Adan Sultan's GitHub Stats</text>
+  <rect x="1.25" y="1.25" width="417.5" height="192.5" rx="10" fill="#0d1117" stroke="#e6edf3" stroke-width="2.5"/>
+  <text x="25" y="35" fill="#ffffff" style="font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif;">Dur E Adan Sultan's GitHub Stats</text>
   
   <text x="25" y="68" class="label">Total Stars Earned:</text>
   <text x="270" y="68" class="value">1</text>
@@ -22,5 +21,5 @@
   <circle cx="365" cy="100" r="34" fill="none" stroke="#58a6ff" stroke-width="5"
     stroke-dasharray="213.6" stroke-dashoffset="117.5"
     stroke-linecap="round" transform="rotate(-90 365 100)"/>
-  <text x="365" y="107" text-anchor="middle" class="value" font-size="20">B</text><text x="25" y="185" class="footer">Updated 2026-08-03 17:51 UTC</text>
+  <text x="365" y="107" text-anchor="middle" class="value" font-size="20">B</text><text x="25" y="185" class="footer">Updated 2026-08-03 18:59 UTC</text>
 </svg>
