@@ -347,6 +347,20 @@ function rankFor(value, [sMin, aMin, bMin]) {
   return 'C';
 }
 
+// Draws a trophy cup (bowl + handles + stem + base) inside a 50-wide box
+// whose top-left corner is (x, y). Colored entirely in `color`.
+function trophyCup(x, y, color) {
+  return `
+  <path d="M${x + 5},${y + 2} H${x + 45} V${y + 14} Q${x + 45},${y + 34} ${x + 25},${y + 34} Q${x + 5},${y + 34} ${x + 5},${y + 14} Z" fill="${color}"/>
+  <path d="M${x + 5},${y + 8} Q${x - 9},${y + 8} ${x - 9},${y + 18} Q${x - 9},${y + 27} ${x + 5},${y + 25}" fill="none" stroke="${color}" stroke-width="3.5"/>
+  <path d="M${x + 45},${y + 8} Q${x + 59},${y + 8} ${x + 59},${y + 18} Q${x + 59},${y + 27} ${x + 45},${y + 25}" fill="none" stroke="${color}" stroke-width="3.5"/>
+  <rect x="${x + 21}" y="${y + 34}" width="8" height="9" fill="${color}"/>
+  <rect x="${x + 9}" y="${y + 43}" width="32" height="5" rx="2" fill="${color}"/>
+  <!-- laurel leaves either side of the cup -->
+  <text x="${x - 16}" y="${y + 24}" font-size="15">🌿</text>
+  <text x="${x + 66}" y="${y + 24}" font-size="15" transform="scale(-1,1) translate(${-2 * (x + 66)},0)">🌿</text>`;
+}
+
 function buildTrophiesCard(repos, user, prCount, issueCount, totalCommits) {
   const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
 
@@ -359,31 +373,45 @@ function buildTrophiesCard(repos, user, prCount, issueCount, totalCommits) {
     { name: 'Repositories', value: user.public_repos, thresholds: [50, 15, 5] },
   ];
 
-  const boxW = 110, gap = 12, boxY = 50, boxH = 110;
-  const width = 20 * 2 + categories.length * boxW + (categories.length - 1) * gap;
+  const colW = 150, contentTop = 55, cardHeight = 260;
+  const width = 40 + categories.length * colW;
+  const labelColor = '#f06595'; // pink/coral for label + points, matches reference
+  const barColor = '#d4a017'; // gold progress bar
+
+  const dividers = categories
+    .slice(1)
+    .map((_, i) => {
+      const dx = 20 + (i + 1) * colW;
+      return `<line x1="${dx}" y1="${contentTop}" x2="${dx}" y2="${contentTop + 195}" stroke="#30363d"/>`;
+    })
+    .join('');
 
   const body = categories
     .map((cat, i) => {
       const rank = rankFor(cat.value, cat.thresholds);
       const color = TROPHY_TIER_COLOR[rank];
       const label = TROPHY_LABELS[cat.name][rank];
-      const bx = 20 + i * (boxW + gap);
-      const cx = bx + boxW / 2;
-      const cy = boxY + 55;
+      const x0 = 20 + i * colW;
+      const cx = x0 + colW / 2;
+      const cupX = cx - 25;
+      const cupY = contentTop + 30;
+      const barFrac = Math.max(0.08, Math.min(cat.value / cat.thresholds[0], 1));
+      const barTrackW = 60;
+      const barFillW = (barTrackW * barFrac).toFixed(1);
 
       return `
-  <rect x="${bx}" y="${boxY}" width="${boxW}" height="${boxH}" rx="8" fill="#161b22" stroke="${color}" stroke-width="2"/>
-  <text x="${cx}" y="${boxY + 18}" text-anchor="middle" font-size="11" font-weight="600" fill="${color}">${cat.name}</text>
-  <text x="${cx - 26}" y="${cy + 5}" text-anchor="middle" font-size="14">🌿</text>
-  <circle cx="${cx}" cy="${cy}" r="20" fill="none" stroke="${color}" stroke-width="3"/>
-  <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-size="18" font-weight="700" fill="${color}">${rank}</text>
-  <text x="${cx + 26}" y="${cy + 5}" text-anchor="middle" font-size="14">🌿</text>
-  <text x="${cx}" y="${boxY + 90}" text-anchor="middle" font-size="9" fill="#c9d1d9">${label}</text>
-  <text x="${cx}" y="${boxY + 103}" text-anchor="middle" font-size="11" font-weight="600" fill="#ffffff">${cat.value}pt</text>`;
+  <text x="${cx}" y="${contentTop + 15}" text-anchor="middle" font-size="14" font-weight="700" fill="${color}">${cat.name}</text>
+  ${trophyCup(cupX, cupY, color)}
+  <circle cx="${cx}" cy="${cupY + 16}" r="15" fill="#0d1117" stroke="${color}" stroke-width="3"/>
+  <text x="${cx}" y="${cupY + 21}" text-anchor="middle" font-size="15" font-weight="700" fill="${color}">${rank}</text>
+  <text x="${cx}" y="${contentTop + 128}" text-anchor="middle" font-size="12" font-weight="700" fill="${labelColor}">${label}</text>
+  <text x="${cx}" y="${contentTop + 146}" text-anchor="middle" font-size="13" font-weight="700" fill="${labelColor}">${cat.value}pt</text>
+  <rect x="${(cx - barTrackW / 2).toFixed(1)}" y="${contentTop + 155}" width="${barTrackW}" height="4" rx="2" fill="#30363d"/>
+  <rect x="${(cx - barTrackW / 2).toFixed(1)}" y="${contentTop + 155}" width="${barFillW}" height="4" rx="2" fill="${barColor}"/>`;
     })
     .join('');
 
-  return cardShell({ title: 'GitHub Trophies', width, height: boxY + boxH + 15, body });
+  return cardShell({ title: 'GitHub Trophies', width, height: cardHeight, body: dividers + body });
 }
 
 // ---------- 5. Random quote ----------
