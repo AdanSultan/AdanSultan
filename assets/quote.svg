@@ -7,5 +7,5 @@
   </style>
   <rect x="0.5" y="0.5" width="419" height="134" rx="10" fill="#0d1117" stroke="#30363d"/>
   <text x="25" y="35" class="title">💬 Random Dev Quote</text>
-  <text x="25" y="70" class="value" font-style="italic">Nothing can dim the light which shines from within.</text><text x="25" y="105" class="label">— Maya Angelou</text>
+  <text x="25" y="70" class="value" font-style="italic">If you want peace, you won't get it with violence.</text><text x="25" y="105" class="label">— John Lennon</text>
 </svg>
