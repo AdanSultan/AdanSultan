@@ -1,10 +1,10 @@
 <svg width="420" height="181" viewBox="0 0 420 181" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
-    .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
+    .label { font: 700 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
+    .value { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="1.25" y="1.25" width="417.5" height="178.5" rx="10" fill="#0d1117" stroke="#e6edf3" stroke-width="2.5"/>
+  <rect x="1.25" y="1.25" width="417.5" height="178.5" rx="10" fill="#080a0c" stroke="#e6edf3" stroke-width="2.5"/>
   <text x="25" y="35" fill="#ffffff" style="font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif;">Most Used Languages</text>
   <rect x="25" y="55" width="370" height="10" rx="5" fill="#30363d"/><rect x="25.0" y="55" width="220.6" height="10" fill="#DA5B0B"/><rect x="245.6" y="55" width="96.3" height="10" fill="#b07219"/><rect x="341.9" y="55" width="18.7" height="10" fill="#3572A5"/><rect x="360.7" y="55" width="14.1" height="10" fill="#563d7c"/><rect x="374.7" y="55" width="12.4" height="10" fill="#f1e05a"/><rect x="387.2" y="55" width="7.8" height="10" fill="#e34c26"/>
   <circle cx="30" cy="91" r="5" fill="#DA5B0B"/>
