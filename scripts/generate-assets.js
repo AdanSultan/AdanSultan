@@ -410,32 +410,71 @@ function buildTrophiesCard(repos, user, prCount, issueCount, totalCommits) {
 
 // ---------- 5. Random quote ----------
 
+// Bade fallback pool taake agar API fail/slow ho ya same quote repeat ho,
+// tab bhi variety mile — random index se pick hota hai.
+const FALLBACK_QUOTES = [
+  ['Code is like humor. When you have to explain it, it’s bad.', 'Cory House'],
+  ['First, solve the problem. Then, write the code.', 'John Johnson'],
+  ['Experience is the name everyone gives to their mistakes.', 'Oscar Wilde'],
+  ['In order to be irreplaceable, one must always be different.', 'Coco Chanel'],
+  ['Java is to JavaScript what car is to Carpet.', 'Chris Heilmann'],
+  ['Knowledge is power.', 'Francis Bacon'],
+  ['Sometimes it pays to stay in bed on Monday.', 'Bob Marley'],
+  ['Simplicity is the soul of efficiency.', 'Austin Freeman'],
+  ['Before software can be reusable it first has to be usable.', 'Ralph Johnson'],
+  ['Programs must be written for people to read.', 'Harold Abelson'],
+  ['The best error message is the one that never shows up.', 'Thomas Fuchs'],
+  ['Talk is cheap. Show me the code.', 'Linus Torvalds'],
+  ['Make it work, make it right, make it fast.', 'Kent Beck'],
+  ['Any fool can write code a computer can understand.', 'Martin Fowler'],
+  ['Premature optimization is the root of all evil.', 'Donald Knuth'],
+];
+
 async function buildQuoteCard() {
-  let quote = 'Code is like humor. When you have to explain it, it’s bad.';
-  let author = 'Cory House';
+  let quote, author;
+
   try {
-    const res = await fetch('https://zenquotes.io/api/random');
+    // cache-buster query param taake fresh response mile, purana cached na aaye
+    const res = await fetch(`https://zenquotes.io/api/random?_=${Date.now()}`);
     if (res.ok) {
       const data = await res.json();
-      if (data && data[0]) {
+      if (data && data[0] && data[0].q) {
         quote = data[0].q;
         author = data[0].a;
       }
     }
   } catch (e) {
-    // fetch fail ho to fallback quote use hoga
+    // fetch fail ho to neeche fallback list se random pick hoga
   }
 
-  const lines = wrapText(quote, 55);
-  const body = lines
-    .map((line, i) => `<text x="25" y="${70 + i * 20}" class="value" font-style="italic">${line.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</text>`)
+  if (!quote) {
+    const pick = FALLBACK_QUOTES[Math.floor(Math.random() * FALLBACK_QUOTES.length)];
+    quote = pick[0];
+    author = pick[1];
+  }
+
+  const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const lines = wrapText(quote, 52);
+  const width = 420;
+
+  const quoteLines = lines
+    .map((line, i) => {
+      const prefix = i === 0 ? '\u201c' : '';
+      const suffix = i === lines.length - 1 ? '\u201d' : '';
+      return `<text x="25" y="${45 + i * 24}" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">${prefix}${escape(line)}${suffix}</text>`;
+    })
     .join('');
-  const authorLine = `<text x="25" y="${70 + lines.length * 20 + 15}" class="label">— ${author}</text>`;
+
+  const authorY = 45 + lines.length * 24 + 28;
+  const authorLine = `<text x="${width - 25}" y="${authorY}" text-anchor="end" font-size="13" font-style="italic" fill="#f06595">- ${escape(author)}</text>`;
+
+  const boxHeight = 45 + lines.length * 24 + 45;
+  const box = `<rect x="20" y="15" width="${width - 40}" height="${boxHeight}" rx="10" fill="#161b22"/>`;
 
   return cardShell({
-    title: '💬 Random Dev Quote',
-    height: 70 + lines.length * 20 + 45,
-    body: body + authorLine,
+    width,
+    height: boxHeight + 30,
+    body: box + quoteLines + authorLine,
   });
 }
 
