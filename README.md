@@ -18,8 +18,7 @@
 ### ✍️ Random Dev Quote
 ![](./assets/quote.svg)
 
-### 🔝 Top Repositories
-![](./assets/top-repos.svg)
+
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AdanSultan/AdanSultan/output/github-snake-dark.svg" />
