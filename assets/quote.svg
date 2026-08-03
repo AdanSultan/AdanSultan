@@ -7,5 +7,5 @@
   </style>
   <rect x="0.5" y="0.5" width="419" height="134" rx="10" fill="#0d1117" stroke="#30363d"/>
   <text x="25" y="35" class="title">💬 Random Dev Quote</text>
-  <text x="25" y="70" class="value" font-style="italic">Courage is found in unlikely places.</text><text x="25" y="105" class="label">— J.R.R. Tolkien</text>
+  <text x="25" y="70" class="value" font-style="italic">In spite of everything, I shall rise again.</text><text x="25" y="105" class="label">— Vincent van Gogh</text>
 </svg>
