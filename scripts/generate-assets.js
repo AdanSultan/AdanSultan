@@ -92,35 +92,69 @@ function cardShell({ width = 420, height = 195, title, body }) {
 </svg>`;
 }
 
-// ---------- 1. Stats card ----------
+// ---------- date helpers ----------
 
-async function buildStatsCard(repos, user, prCount, issueCount) {
+function formatShort(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00Z');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+
+function formatLong(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00Z');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+}
+
+// ---------- 1. Stats card (with grade ring) ----------
+
+function calcGrade({ totalStars, totalCommits, followers, publicRepos }) {
+  const score = totalStars * 3 + totalCommits * 0.7 + followers * 2 + publicRepos * 1.5;
+  if (score >= 1000) return { letter: 'S', pct: 100 };
+  if (score >= 500) return { letter: 'A+', pct: 90 };
+  if (score >= 250) return { letter: 'A', pct: 75 };
+  if (score >= 120) return { letter: 'B+', pct: 60 };
+  if (score >= 60) return { letter: 'B', pct: 45 };
+  if (score >= 25) return { letter: 'C+', pct: 30 };
+  return { letter: 'C', pct: 15 };
+}
+
+async function buildStatsCard(repos, user, prCount, issueCount, totalCommits) {
   const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
-  const totalForks = repos.reduce((s, r) => s + (r.forks_count || 0), 0);
+  const displayName = user.name || USERNAME;
+  const grade = calcGrade({ totalStars, totalCommits, followers: user.followers, publicRepos: user.public_repos });
 
   const rows = [
-    ['⭐ Total Stars', totalStars],
-    ['🍴 Total Forks', totalForks],
-    ['📦 Public Repos', user.public_repos],
-    ['👥 Followers', user.followers],
-    ['🔀 Pull Requests', prCount],
-    ['🐛 Issues Opened', issueCount],
+    ['Total Stars Earned', totalStars],
+    ['Total Commits (last year)', totalCommits],
+    ['Total PRs', prCount],
+    ['Total Issues', issueCount],
+    ['Public Repos', user.public_repos],
   ];
 
   const body = rows
     .map(
       ([label, value], i) => `
-  <text x="25" y="${65 + i * 21}" class="label">${label}</text>
-  <text x="${420 - 25}" y="${65 + i * 21}" text-anchor="end" class="value">${value}</text>`
+  <text x="25" y="${68 + i * 20}" class="label">${label}:</text>
+  <text x="270" y="${68 + i * 20}" class="value">${value}</text>`
     )
     .join('');
 
+  // grade ring top-right
+  const cx = 365, cy = 100, r = 34;
+  const circumference = 2 * Math.PI * r;
+  const dashOffset = circumference * (1 - grade.pct / 100);
+  const ring = `
+  <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#30363d" stroke-width="5"/>
+  <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#58a6ff" stroke-width="5"
+    stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${dashOffset.toFixed(1)}"
+    stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})"/>
+  <text x="${cx}" y="${cy + 7}" text-anchor="middle" class="value" font-size="20">${grade.letter}</text>`;
+
   const footer = `<text x="25" y="185" class="footer">Updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</text>`;
 
-  return cardShell({ title: `${USERNAME}'s GitHub Stats`, body: body + footer });
+  return cardShell({ title: `${displayName}'s GitHub Stats`, body: body + ring + footer });
 }
 
-// ---------- 2. Streak card ----------
+// ---------- 2. Streak card (circular flame + date ranges) ----------
 
 async function getContributionData() {
   const query = `
@@ -141,18 +175,32 @@ async function getContributionData() {
   const days = cal.weeks.flatMap((w) => w.contributionDays);
 
   let currentStreak = 0;
+  let currentStreakEndDate = days[days.length - 1].date;
   for (let i = days.length - 1; i >= 0; i--) {
-    if (days[i].contributionCount > 0) currentStreak++;
-    else if (i === days.length - 1) continue; // aaj abhi commit nahi hua, ignore
-    else break;
+    if (days[i].contributionCount > 0) {
+      currentStreak++;
+      currentStreakEndDate = days[i].date;
+    } else if (i === days.length - 1) {
+      continue; // aaj abhi commit nahi hua, ignore aur peeche dekho
+    } else {
+      break;
+    }
   }
 
   let longestStreak = 0;
   let running = 0;
+  let runStart = null;
+  let bestStart = days[0].date;
+  let bestEnd = days[0].date;
   for (const d of days) {
     if (d.contributionCount > 0) {
+      if (running === 0) runStart = d.date;
       running++;
-      longestStreak = Math.max(longestStreak, running);
+      if (running > longestStreak) {
+        longestStreak = running;
+        bestStart = runStart;
+        bestEnd = d.date;
+      }
     } else {
       running = 0;
     }
@@ -162,30 +210,65 @@ async function getContributionData() {
     total: cal.totalContributions,
     currentStreak,
     longestStreak,
+    firstDate: days[0].date,
+    currentStreakEndDate,
+    longestStreakStart: bestStart,
+    longestStreakEnd: bestEnd,
   };
 }
 
-function buildStreakCard({ total, currentStreak, longestStreak }) {
+function buildStreakCard(data) {
+  const { total, currentStreak, longestStreak } = data;
+
+  const flameCx = 210, flameCy = 85, flameR = 40;
+  const circumference = 2 * Math.PI * flameR;
+
   const body = `
-  <text x="70" y="90" text-anchor="middle" class="value" font-size="26">${total}</text>
-  <text x="70" y="112" text-anchor="middle" class="label">Total Contributions</text>
+  <text x="70" y="75" text-anchor="middle" class="value" font-size="28">${total}</text>
+  <text x="70" y="98" text-anchor="middle" class="label">Total Contributions</text>
+  <text x="70" y="115" text-anchor="middle" class="footer">${formatLong(data.firstDate)} - Present</text>
 
-  <line x1="150" y1="60" x2="150" y2="130" stroke="#30363d"/>
+  <circle cx="${flameCx}" cy="${flameCy}" r="${flameR}" fill="none" stroke="#f0883e" stroke-width="4"/>
+  <text x="${flameCx}" y="${flameCy - 2}" text-anchor="middle" font-size="20">🔥</text>
+  <text x="${flameCx}" y="${flameCy + 18}" text-anchor="middle" class="value" font-size="16">${currentStreak}</text>
+  <text x="${flameCx}" y="${flameCy + 55}" text-anchor="middle" class="label" fill="#f0883e">Current Streak</text>
+  <text x="${flameCx}" y="${flameCy + 70}" text-anchor="middle" class="footer">${formatShort(data.currentStreakEndDate)}</text>
 
-  <text x="230" y="90" text-anchor="middle" class="value" font-size="26">🔥 ${currentStreak}</text>
-  <text x="230" y="112" text-anchor="middle" class="label">Current Streak</text>
+  <text x="350" y="75" text-anchor="middle" class="value" font-size="28">${longestStreak}</text>
+  <text x="350" y="98" text-anchor="middle" class="label">Longest Streak</text>
+  <text x="350" y="115" text-anchor="middle" class="footer">${formatShort(data.longestStreakStart)} - ${formatShort(data.longestStreakEnd)}</text>
 
-  <line x1="310" y1="60" x2="310" y2="130" stroke="#30363d"/>
-
-  <text x="380" y="90" text-anchor="middle" class="value" font-size="26">${longestStreak}</text>
-  <text x="380" y="112" text-anchor="middle" class="label">Longest Streak</text>
+  <line x1="140" y1="45" x2="140" y2="135" stroke="#30363d"/>
+  <line x1="280" y1="45" x2="280" y2="135" stroke="#30363d"/>
 
   <text x="25" y="185" class="footer">Updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</text>`;
 
-  return cardShell({ title: `${USERNAME}'s Contribution Streak`, body });
+  return cardShell({ title: `Contribution Streak`, body });
 }
 
-// ---------- 3. Top languages ----------
+// ---------- 3. Top languages (single bar + colored dot legend) ----------
+
+const LANGUAGE_COLORS = {
+  'Jupyter Notebook': '#DA5B0B',
+  JavaScript: '#f1e05a',
+  TypeScript: '#3178c6',
+  Python: '#3572A5',
+  Java: '#b07219',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  'C++': '#f34b7d',
+  C: '#555555',
+  'C#': '#178600',
+  PHP: '#4F5D95',
+  Ruby: '#701516',
+  Go: '#00ADD8',
+  Rust: '#dea584',
+  Shell: '#89e051',
+  Dockerfile: '#384d54',
+  Vue: '#41b883',
+  SCSS: '#c6538c',
+};
+const FALLBACK_COLORS = ['#58a6ff', '#3fb950', '#f778ba', '#a371f7', '#e3b341', '#79c0ff'];
 
 async function buildTopLangsCard(repos) {
   const langTotals = {};
@@ -204,25 +287,43 @@ async function buildTopLangsCard(repos) {
   const sorted = Object.entries(langTotals).sort((a, b) => b[1] - a[1]).slice(0, 6);
   const total = sorted.reduce((s, [, v]) => s + v, 0) || 1;
 
-  const colors = ['#58a6ff', '#3fb950', '#f0883e', '#f778ba', '#a371f7', '#e3b341'];
+  const colorFor = (lang, i) => LANGUAGE_COLORS[lang] || FALLBACK_COLORS[i % FALLBACK_COLORS.length];
 
-  const body = sorted
+  // ek hi stacked bar
+  let xCursor = 25;
+  const barY = 55, barW = 370, barH = 10;
+  const barSegments = sorted
     .map(([lang, bytes], i) => {
-      const pct = ((bytes / total) * 100).toFixed(1);
-      const barWidth = (bytes / total) * 300;
-      const y = 55 + i * 24;
-      return `
-  <text x="25" y="${y}" class="label">${lang}</text>
-  <text x="395" y="${y}" text-anchor="end" class="value">${pct}%</text>
-  <rect x="25" y="${y + 5}" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="${y + 5}" width="${barWidth.toFixed(1)}" height="6" rx="3" fill="${colors[i % colors.length]}"/>`;
+      const segW = (bytes / total) * barW;
+      const rect = `<rect x="${xCursor.toFixed(1)}" y="${barY}" width="${segW.toFixed(1)}" height="${barH}" fill="${colorFor(lang, i)}"/>`;
+      xCursor += segW;
+      return rect;
     })
     .join('');
 
+  // 2-column legend, colored dots
+  const legendStartY = 95;
+  const rowGap = 22;
+  const legend = sorted
+    .map(([lang, bytes], i) => {
+      const col = i % 2;
+      const row = Math.floor(i / 2);
+      const x = col === 0 ? 25 : 220;
+      const y = legendStartY + row * rowGap;
+      const pct = ((bytes / total) * 100).toFixed(2);
+      return `
+  <circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${colorFor(lang, i)}"/>
+  <text x="${x + 18}" y="${y}" class="label" font-size="12">${lang} ${pct}%</text>`;
+    })
+    .join('');
+
+  const legendRows = Math.ceil(sorted.length / 2);
+  const height = legendStartY + legendRows * rowGap + 20;
+
   return cardShell({
-    title: `${USERNAME}'s Top Languages`,
-    height: 55 + sorted.length * 24 + 20,
-    body,
+    title: `Most Used Languages`,
+    height,
+    body: `<rect x="25" y="${barY}" width="${barW}" height="${barH}" rx="5" fill="#30363d"/>${barSegments}${legend}`,
   });
 }
 
@@ -327,7 +428,7 @@ async function main() {
   const streakData = await getContributionData();
 
   console.log('Building cards...');
-  const stats = await buildStatsCard(repos, user, prSearch.total_count, issueSearch.total_count);
+  const stats = await buildStatsCard(repos, user, prSearch.total_count, issueSearch.total_count, streakData.total);
   const streak = buildStreakCard(streakData);
   const topLangs = await buildTopLangsCard(repos);
   const trophies = buildTrophiesCard(repos, user, streakData);
