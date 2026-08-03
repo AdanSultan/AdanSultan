@@ -16,7 +16,7 @@
 ![](./assets/trophies.svg)
 
 ### ✍️ Random Dev Quote
-![](./assets/quote.svg)
+![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
 
 
