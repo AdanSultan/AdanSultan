@@ -1,0 +1,42 @@
+name: Update README Assets
+
+on:
+  schedule:
+    # Har 15 minute mein chalega — real-time ke kareeb-tareen
+    - cron: '*/15 * * * *'
+  push:
+    branches: [main]
+  workflow_dispatch: {}   # Actions tab se manually chalane ke liye
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-readme
+  cancel-in-progress: true
+
+jobs:
+  update-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate fresh SVG assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USERNAME: AdanSultan
+        run: node scripts/generate-assets.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/
+          git diff --staged --quiet || git commit -m "chore: auto-update README assets"
+          git push
