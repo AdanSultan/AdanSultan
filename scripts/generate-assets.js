@@ -78,15 +78,15 @@ function wrapText(text, maxCharsPerLine) {
 
 // ---------- SVG card shell (dark theme, matches previous badge look) ----------
 
-function cardShell({ width = 420, height = 195, title, body, titleColor = '#58a6ff', borderColor = '#30363d', borderWidth = 1 }) {
+function cardShell({ width = 420, height = 195, title, body, titleColor = '#58a6ff', borderColor = '#30363d', borderWidth = 1, bgColor = '#0d1117' }) {
   const titleText = title ? `<text x="25" y="35" fill="${titleColor}" style="font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif;">${title}</text>` : '';
   return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
-    .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
+    .label { font: 700 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
+    .value { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="${borderWidth / 2}" y="${borderWidth / 2}" width="${width - borderWidth}" height="${height - borderWidth}" rx="10" fill="#0d1117" stroke="${borderColor}" stroke-width="${borderWidth}"/>
+  <rect x="${borderWidth / 2}" y="${borderWidth / 2}" width="${width - borderWidth}" height="${height - borderWidth}" rx="10" fill="${bgColor}" stroke="${borderColor}" stroke-width="${borderWidth}"/>
   ${titleText}
   ${body}
 </svg>`;
@@ -144,10 +144,10 @@ async function buildStatsCard(repos, user, prCount, issueCount, totalCommits) {
   const dashOffset = circumference * (1 - grade.pct / 100);
   const ring = `
   <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#30363d" stroke-width="5"/>
-  <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#58a6ff" stroke-width="5"
+  <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#f0883e" stroke-width="5"
     stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${dashOffset.toFixed(1)}"
     stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})"/>
-  <text x="${cx}" y="${cy + 7}" text-anchor="middle" class="value" font-size="20">${grade.letter}</text>`;
+  <text x="${cx}" y="${cy + 7}" text-anchor="middle" font-size="20" font-weight="700" fill="#f0883e">${grade.letter}</text>`;
 
   const footer = `<text x="25" y="185" class="footer">Updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</text>`;
 
@@ -155,6 +155,7 @@ async function buildStatsCard(repos, user, prCount, issueCount, totalCommits) {
     title: `${displayName}'s GitHub Stats`,
     body: body + ring + footer,
     titleColor: '#ffffff',
+    bgColor: '#080a0c',
     borderColor: '#e6edf3',
     borderWidth: 2.5,
   });
@@ -253,6 +254,7 @@ function buildStreakCard(data) {
     title: `Contribution Streak`,
     body,
     titleColor: '#ffffff',
+    bgColor: '#080a0c',
     borderColor: '#e6edf3',
     borderWidth: 2.5,
   });
@@ -337,6 +339,7 @@ async function buildTopLangsCard(repos) {
     height,
     body: `<rect x="25" y="${barY}" width="${barW}" height="${barH}" rx="5" fill="#30363d"/>${barSegments}${legend}`,
     titleColor: '#ffffff',
+    bgColor: '#080a0c',
     borderColor: '#e6edf3',
     borderWidth: 2.5,
   });
