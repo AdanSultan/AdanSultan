@@ -327,30 +327,63 @@ async function buildTopLangsCard(repos) {
   });
 }
 
-// ---------- 4. Trophies-style summary ----------
+// ---------- 4. Trophies (S/A/B/C rank badges, like classic profile-trophy) ----------
 
-function buildTrophiesCard(repos, user, streakData) {
+const TROPHY_TIER_COLOR = { S: '#39d353', A: '#58a6ff', B: '#a371f7', C: '#8b949e' };
+
+const TROPHY_LABELS = {
+  Stars: { S: 'Stargazer', A: 'Star Collector', B: 'Star Hunter', C: 'First Star' },
+  Commit: { S: 'Commit God', A: 'Ultra Committer', B: 'Active Committer', C: 'First Commit' },
+  Followers: { S: 'Influencer', A: 'Dynamic User', B: 'Growing User', C: 'First Follower' },
+  Issues: { S: 'Issue Master', A: 'High Issuer', B: 'Casual Issuer', C: 'First Issue' },
+  PullRequest: { S: 'PR Master', A: 'Senior PR User', B: 'Middle PR User', C: 'First PR' },
+  Repositories: { S: 'Repo Master', A: 'Repo Collector', B: 'Repo Builder', C: 'First Repository' },
+};
+
+function rankFor(value, [sMin, aMin, bMin]) {
+  if (value >= sMin) return 'S';
+  if (value >= aMin) return 'A';
+  if (value >= bMin) return 'B';
+  return 'C';
+}
+
+function buildTrophiesCard(repos, user, prCount, issueCount, totalCommits) {
   const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
-  const items = [
-    ['🏆', totalStars, 'Stars'],
-    ['📦', user.public_repos, 'Repos'],
-    ['👥', user.followers, 'Followers'],
-    ['🔥', streakData.currentStreak, 'Streak'],
+
+  const categories = [
+    { name: 'Stars', value: totalStars, thresholds: [50, 10, 3] },
+    { name: 'Commit', value: totalCommits, thresholds: [1000, 200, 50] },
+    { name: 'Followers', value: user.followers, thresholds: [500, 20, 5] },
+    { name: 'Issues', value: issueCount, thresholds: [200, 20, 5] },
+    { name: 'PullRequest', value: prCount, thresholds: [200, 20, 5] },
+    { name: 'Repositories', value: user.public_repos, thresholds: [50, 15, 5] },
   ];
 
-  const boxWidth = 100;
-  const body = items
-    .map(([icon, value, label], i) => {
-      const x = 15 + i * boxWidth;
+  const boxW = 110, gap = 12, boxY = 50, boxH = 110;
+  const width = 20 * 2 + categories.length * boxW + (categories.length - 1) * gap;
+
+  const body = categories
+    .map((cat, i) => {
+      const rank = rankFor(cat.value, cat.thresholds);
+      const color = TROPHY_TIER_COLOR[rank];
+      const label = TROPHY_LABELS[cat.name][rank];
+      const bx = 20 + i * (boxW + gap);
+      const cx = bx + boxW / 2;
+      const cy = boxY + 55;
+
       return `
-  <rect x="${x}" y="45" width="${boxWidth - 10}" height="90" rx="8" fill="#161b22" stroke="#30363d"/>
-  <text x="${x + (boxWidth - 10) / 2}" y="80" text-anchor="middle" font-size="24">${icon}</text>
-  <text x="${x + (boxWidth - 10) / 2}" y="105" text-anchor="middle" class="value" font-size="16">${value}</text>
-  <text x="${x + (boxWidth - 10) / 2}" y="122" text-anchor="middle" class="label" font-size="11">${label}</text>`;
+  <rect x="${bx}" y="${boxY}" width="${boxW}" height="${boxH}" rx="8" fill="#161b22" stroke="${color}" stroke-width="2"/>
+  <text x="${cx}" y="${boxY + 18}" text-anchor="middle" font-size="11" font-weight="600" fill="${color}">${cat.name}</text>
+  <text x="${cx - 26}" y="${cy + 5}" text-anchor="middle" font-size="14">🌿</text>
+  <circle cx="${cx}" cy="${cy}" r="20" fill="none" stroke="${color}" stroke-width="3"/>
+  <text x="${cx}" y="${cy + 6}" text-anchor="middle" font-size="18" font-weight="700" fill="${color}">${rank}</text>
+  <text x="${cx + 26}" y="${cy + 5}" text-anchor="middle" font-size="14">🌿</text>
+  <text x="${cx}" y="${boxY + 90}" text-anchor="middle" font-size="9" fill="#c9d1d9">${label}</text>
+  <text x="${cx}" y="${boxY + 103}" text-anchor="middle" font-size="11" font-weight="600" fill="#ffffff">${cat.value}pt</text>`;
     })
     .join('');
 
-  return cardShell({ title: `${USERNAME}'s Trophies`, height: 150, body });
+  return cardShell({ title: 'GitHub Trophies', width, height: boxY + boxH + 15, body });
 }
 
 // ---------- 5. Random quote ----------
@@ -431,7 +464,7 @@ async function main() {
   const stats = await buildStatsCard(repos, user, prSearch.total_count, issueSearch.total_count, streakData.total);
   const streak = buildStreakCard(streakData);
   const topLangs = await buildTopLangsCard(repos);
-  const trophies = buildTrophiesCard(repos, user, streakData);
+  const trophies = buildTrophiesCard(repos, user, prSearch.total_count, issueSearch.total_count, streakData.total);
   const quote = await buildQuoteCard();
   const topRepos = buildTopReposCard(repos);
 
