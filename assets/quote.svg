@@ -1,11 +1,11 @@
-<svg width="420" height="155" viewBox="0 0 420 155" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="135" viewBox="0 0 420 135" xmlns="http://www.w3.org/2000/svg">
   <style>
     .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #58a6ff; }
     .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
     .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="0.5" y="0.5" width="419" height="154" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <rect x="0.5" y="0.5" width="419" height="134" rx="10" fill="#0d1117" stroke="#30363d"/>
   <text x="25" y="35" class="title">💬 Random Dev Quote</text>
-  <text x="25" y="70" class="value" font-style="italic">The single biggest problem in communication is the</text><text x="25" y="90" class="value" font-style="italic">illusion that it has taken place.</text><text x="25" y="125" class="label">— George Bernard Shaw</text>
+  <text x="25" y="70" class="value" font-style="italic">Courage is found in unlikely places.</text><text x="25" y="105" class="label">— J.R.R. Tolkien</text>
 </svg>

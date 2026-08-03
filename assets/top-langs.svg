@@ -1,35 +1,23 @@
-<svg width="420" height="219" viewBox="0 0 420 219" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="181" viewBox="0 0 420 181" xmlns="http://www.w3.org/2000/svg">
   <style>
     .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #58a6ff; }
     .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
     .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="0.5" y="0.5" width="419" height="218" rx="10" fill="#0d1117" stroke="#30363d"/>
-  <text x="25" y="35" class="title">AdanSultan's Top Languages</text>
-  
-  <text x="25" y="55" class="label">Jupyter Notebook</text>
-  <text x="395" y="55" text-anchor="end" class="value">60.6%</text>
-  <rect x="25" y="60" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="60" width="181.7" height="6" rx="3" fill="#58a6ff"/>
-  <text x="25" y="79" class="label">Java</text>
-  <text x="395" y="79" text-anchor="end" class="value">26.4%</text>
-  <rect x="25" y="84" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="84" width="79.3" height="6" rx="3" fill="#3fb950"/>
-  <text x="25" y="103" class="label">Python</text>
-  <text x="395" y="103" text-anchor="end" class="value">5.1%</text>
-  <rect x="25" y="108" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="108" width="15.4" height="6" rx="3" fill="#f0883e"/>
-  <text x="25" y="127" class="label">CSS</text>
-  <text x="395" y="127" text-anchor="end" class="value">3.9%</text>
-  <rect x="25" y="132" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="132" width="11.6" height="6" rx="3" fill="#f778ba"/>
-  <text x="25" y="151" class="label">HTML</text>
-  <text x="395" y="151" text-anchor="end" class="value">2.2%</text>
-  <rect x="25" y="156" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="156" width="6.5" height="6" rx="3" fill="#a371f7"/>
-  <text x="25" y="175" class="label">JavaScript</text>
-  <text x="395" y="175" text-anchor="end" class="value">1.9%</text>
-  <rect x="25" y="180" width="300" height="6" rx="3" fill="#30363d"/>
-  <rect x="25" y="180" width="5.6" height="6" rx="3" fill="#e3b341"/>
+  <rect x="0.5" y="0.5" width="419" height="180" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="25" y="35" class="title">Most Used Languages</text>
+  <rect x="25" y="55" width="370" height="10" rx="5" fill="#30363d"/><rect x="25.0" y="55" width="224.0" height="10" fill="#DA5B0B"/><rect x="249.0" y="55" width="97.8" height="10" fill="#b07219"/><rect x="346.9" y="55" width="19.0" height="10" fill="#3572A5"/><rect x="365.9" y="55" width="14.3" height="10" fill="#563d7c"/><rect x="380.2" y="55" width="8.0" height="10" fill="#e34c26"/><rect x="388.1" y="55" width="6.9" height="10" fill="#f1e05a"/>
+  <circle cx="30" cy="91" r="5" fill="#DA5B0B"/>
+  <text x="43" y="95" class="label" font-size="12">Jupyter Notebook 60.55%</text>
+  <circle cx="225" cy="91" r="5" fill="#b07219"/>
+  <text x="238" y="95" class="label" font-size="12">Java 26.44%</text>
+  <circle cx="30" cy="113" r="5" fill="#3572A5"/>
+  <text x="43" y="117" class="label" font-size="12">Python 5.14%</text>
+  <circle cx="225" cy="113" r="5" fill="#563d7c"/>
+  <text x="238" y="117" class="label" font-size="12">CSS 3.86%</text>
+  <circle cx="30" cy="135" r="5" fill="#e34c26"/>
+  <text x="43" y="139" class="label" font-size="12">HTML 2.15%</text>
+  <circle cx="225" cy="135" r="5" fill="#f1e05a"/>
+  <text x="238" y="139" class="label" font-size="12">JavaScript 1.86%</text>
 </svg>

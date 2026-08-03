@@ -6,20 +6,24 @@
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
   <rect x="0.5" y="0.5" width="419" height="194" rx="10" fill="#0d1117" stroke="#30363d"/>
-  <text x="25" y="35" class="title">AdanSultan's Contribution Streak</text>
+  <text x="25" y="35" class="title">Contribution Streak</text>
   
-  <text x="70" y="90" text-anchor="middle" class="value" font-size="26">95</text>
-  <text x="70" y="112" text-anchor="middle" class="label">Total Contributions</text>
+  <text x="70" y="75" text-anchor="middle" class="value" font-size="28">95</text>
+  <text x="70" y="98" text-anchor="middle" class="label">Total Contributions</text>
+  <text x="70" y="115" text-anchor="middle" class="footer">Aug 3, 2025 - Present</text>
 
-  <line x1="150" y1="60" x2="150" y2="130" stroke="#30363d"/>
+  <circle cx="210" cy="85" r="40" fill="none" stroke="#f0883e" stroke-width="4"/>
+  <text x="210" y="83" text-anchor="middle" font-size="20">🔥</text>
+  <text x="210" y="103" text-anchor="middle" class="value" font-size="16">2</text>
+  <text x="210" y="140" text-anchor="middle" class="label" fill="#f0883e">Current Streak</text>
+  <text x="210" y="155" text-anchor="middle" class="footer">Aug 2</text>
 
-  <text x="230" y="90" text-anchor="middle" class="value" font-size="26">🔥 2</text>
-  <text x="230" y="112" text-anchor="middle" class="label">Current Streak</text>
+  <text x="350" y="75" text-anchor="middle" class="value" font-size="28">4</text>
+  <text x="350" y="98" text-anchor="middle" class="label">Longest Streak</text>
+  <text x="350" y="115" text-anchor="middle" class="footer">Jul 18 - Jul 21</text>
 
-  <line x1="310" y1="60" x2="310" y2="130" stroke="#30363d"/>
+  <line x1="140" y1="45" x2="140" y2="135" stroke="#30363d"/>
+  <line x1="280" y1="45" x2="280" y2="135" stroke="#30363d"/>
 
-  <text x="380" y="90" text-anchor="middle" class="value" font-size="26">4</text>
-  <text x="380" y="112" text-anchor="middle" class="label">Longest Streak</text>
-
-  <text x="25" y="185" class="footer">Updated 2026-08-03 09:57 UTC</text>
+  <text x="25" y="185" class="footer">Updated 2026-08-03 10:08 UTC</text>
 </svg>
