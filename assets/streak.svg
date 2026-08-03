@@ -1,0 +1,25 @@
+<svg width="420" height="195" viewBox="0 0 420 195" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #58a6ff; }
+    .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
+    .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
+    .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
+  </style>
+  <rect x="0.5" y="0.5" width="419" height="194" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="25" y="35" class="title">AdanSultan's Contribution Streak</text>
+  
+  <text x="70" y="90" text-anchor="middle" class="value" font-size="26">95</text>
+  <text x="70" y="112" text-anchor="middle" class="label">Total Contributions</text>
+
+  <line x1="150" y1="60" x2="150" y2="130" stroke="#30363d"/>
+
+  <text x="230" y="90" text-anchor="middle" class="value" font-size="26">🔥 2</text>
+  <text x="230" y="112" text-anchor="middle" class="label">Current Streak</text>
+
+  <line x1="310" y1="60" x2="310" y2="130" stroke="#30363d"/>
+
+  <text x="380" y="90" text-anchor="middle" class="value" font-size="26">4</text>
+  <text x="380" y="112" text-anchor="middle" class="label">Longest Streak</text>
+
+  <text x="25" y="185" class="footer">Updated 2026-08-03 09:57 UTC</text>
+</svg>

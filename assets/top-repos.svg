@@ -1,0 +1,21 @@
+<svg width="420" height="190" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #58a6ff; }
+    .label { font: 400 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
+    .value { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
+    .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
+  </style>
+  <rect x="0.5" y="0.5" width="419" height="189" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <text x="25" y="35" class="title">AdanSultan's Top Repositories</text>
+  
+  <text x="25" y="60" class="label">ai_driven_cyber_security_in_health_care</text>
+  <text x="395" y="60" text-anchor="end" class="value">⭐ 1</text>
+  <text x="25" y="82" class="label">AdanSultan</text>
+  <text x="395" y="82" text-anchor="end" class="value">⭐ 0</text>
+  <text x="25" y="104" class="label">AI-Driven-Hashtag-Suggestion-System</text>
+  <text x="395" y="104" text-anchor="end" class="value">⭐ 0</text>
+  <text x="25" y="126" class="label">ai-using-python</text>
+  <text x="395" y="126" text-anchor="end" class="value">⭐ 0</text>
+  <text x="25" y="148" class="label">cpp-lexical-analyzer</text>
+  <text x="395" y="148" text-anchor="end" class="value">⭐ 0</text>
+</svg>
