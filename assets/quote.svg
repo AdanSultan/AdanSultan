@@ -1,10 +1,10 @@
-<svg width="420" height="168" viewBox="0 0 420 168" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="216" viewBox="0 0 420 216" xmlns="http://www.w3.org/2000/svg">
   <style>
     .label { font: 700 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
     .value { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="0.5" y="0.5" width="419" height="167" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="0.5" y="0.5" width="419" height="215" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
   
-  <rect x="20" y="15" width="380" height="138" rx="10" fill="#161b22"/><text x="25" y="45" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">“Remain calm, serene, always in command of yourself.</text><text x="25" y="69" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">You will then find out how easy it is to get along.”</text><text x="395" y="121" text-anchor="end" font-size="13" font-style="italic" fill="#f06595">- Paramahansa Yogananda</text>
+  <rect x="20" y="15" width="380" height="186" rx="10" fill="#161b22"/><text x="25" y="45" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">“Stuff your eyes with wonder... live as if you'd drop</text><text x="25" y="69" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">dead in ten seconds. See the world. It's more</text><text x="25" y="93" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">fantastic than any dream made or paid for in</text><text x="25" y="117" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">factories.”</text><text x="395" y="169" text-anchor="end" font-size="13" font-style="italic" fill="#f06595">- Ray Bradbury</text>
 </svg>
