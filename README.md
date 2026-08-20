@@ -1,7 +1,6 @@
 # 💫 About Me:
 <br>- 🔭 I'm currently working on **data pipelines, CRM automation, and analytics workflows** as a Data Analyst <br>- 👯 I'm looking to collaborate on **AI/ML and data-driven projects**<br>- 🤝 I'm looking for help with **advanced Machine Learning and Deep Learning concepts**<br>- 🌱 I'm currently learning and improving my skills in **Data Science and AI**<br>- 💬 Ask me about **data analysis, CRM systems (SuiteCRM, Twenty CRM), or Excel automation**<br>- ⚡ Fun fact: **I recently graduated in Computer Science and I'm already knee-deep in data pipelines and AI experiments!**
 
-
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/nkedin.com/in/dur-e-adan-sultan) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:adansultan794@gmail.com) 
 
