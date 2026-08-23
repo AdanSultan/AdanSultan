@@ -1,10 +1,10 @@
-<svg width="420" height="216" viewBox="0 0 420 216" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="144" viewBox="0 0 420 144" xmlns="http://www.w3.org/2000/svg">
   <style>
     .label { font: 700 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #c9d1d9; }
     .value { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }
     .footer { font: 400 10px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6e7681; }
   </style>
-  <rect x="0.5" y="0.5" width="419" height="215" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect x="0.5" y="0.5" width="419" height="143" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
   
-  <rect x="20" y="15" width="380" height="186" rx="10" fill="#161b22"/><text x="25" y="45" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">“The most important thing in life is to stop saying</text><text x="25" y="69" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">'I wish' and start saying 'I will'. Consider nothing</text><text x="25" y="93" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">impossible, then treat possibilities as</text><text x="25" y="117" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">probabilities.”</text><text x="395" y="169" text-anchor="end" font-size="13" font-style="italic" fill="#f06595">- Charles Dickens</text>
+  <rect x="20" y="15" width="380" height="114" rx="10" fill="#161b22"/><text x="25" y="45" font-size="14" font-style="italic" font-weight="600" fill="#7ee8c7">“What would you do if you weren't afraid?”</text><text x="395" y="97" text-anchor="end" font-size="13" font-style="italic" fill="#f06595">- Spencer Johnson</text>
 </svg>
