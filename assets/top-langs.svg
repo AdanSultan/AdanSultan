@@ -6,17 +6,17 @@
   </style>
   <rect x="1.25" y="1.25" width="417.5" height="178.5" rx="10" fill="#080a0c" stroke="#e6edf3" stroke-width="2.5"/>
   <text x="25" y="35" fill="#ffffff" style="font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif;">Most Used Languages</text>
-  <rect x="25" y="55" width="370" height="10" rx="5" fill="#30363d"/><rect x="25.0" y="55" width="226.9" height="10" fill="#DA5B0B"/><rect x="251.9" y="55" width="83.2" height="10" fill="#b07219"/><rect x="335.1" y="55" width="30.2" height="10" fill="#3572A5"/><rect x="365.3" y="55" width="12.1" height="10" fill="#563d7c"/><rect x="377.4" y="55" width="10.8" height="10" fill="#f1e05a"/><rect x="388.2" y="55" width="6.8" height="10" fill="#e34c26"/>
+  <rect x="25" y="55" width="370" height="10" rx="5" fill="#30363d"/><rect x="25.0" y="55" width="231.1" height="10" fill="#DA5B0B"/><rect x="256.1" y="55" width="80.7" height="10" fill="#b07219"/><rect x="336.9" y="55" width="29.3" height="10" fill="#3572A5"/><rect x="366.2" y="55" width="11.8" height="10" fill="#563d7c"/><rect x="378.0" y="55" width="10.5" height="10" fill="#f1e05a"/><rect x="388.4" y="55" width="6.6" height="10" fill="#e34c26"/>
   <circle cx="30" cy="91" r="5" fill="#DA5B0B"/>
-  <text x="43" y="95" class="label" font-size="12">Jupyter Notebook 61.33%</text>
+  <text x="43" y="95" class="label" font-size="12">Jupyter Notebook 62.47%</text>
   <circle cx="225" cy="91" r="5" fill="#b07219"/>
-  <text x="238" y="95" class="label" font-size="12">Java 22.48%</text>
+  <text x="238" y="95" class="label" font-size="12">Java 21.82%</text>
   <circle cx="30" cy="113" r="5" fill="#3572A5"/>
-  <text x="43" y="117" class="label" font-size="12">Python 8.16%</text>
+  <text x="43" y="117" class="label" font-size="12">Python 7.92%</text>
   <circle cx="225" cy="113" r="5" fill="#563d7c"/>
-  <text x="238" y="117" class="label" font-size="12">CSS 3.28%</text>
+  <text x="238" y="117" class="label" font-size="12">CSS 3.18%</text>
   <circle cx="30" cy="135" r="5" fill="#f1e05a"/>
-  <text x="43" y="139" class="label" font-size="12">JavaScript 2.92%</text>
+  <text x="43" y="139" class="label" font-size="12">JavaScript 2.83%</text>
   <circle cx="225" cy="135" r="5" fill="#e34c26"/>
-  <text x="238" y="139" class="label" font-size="12">HTML 1.83%</text>
+  <text x="238" y="139" class="label" font-size="12">HTML 1.77%</text>
 </svg>
